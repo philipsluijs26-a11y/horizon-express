@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Horizon Express | De Ultieme Europese Treincharter</title>
     
-    <!-- Favicon (Tabblad-icoon) met minilogo.png -->
-    <link id="dynamic-favicon" rel="icon" type="image/jpeg" href="minilogo.png">
+    <!-- Favicon (Tabblad-icoon) met minilogo.jpg -->
+    <link id="dynamic-favicon" rel="icon" type="image/jpeg" href="minilogo.jpg">
 
     <style>
         :root {
@@ -207,34 +207,44 @@
             font-size: 1.1rem;
         }
 
-        /* Interactieve Trein & Couchettes */
+        /* Interactieve Trein & Couchettes (Volledige 17 eenheden) */
         .train-scroller {
             display: flex;
             gap: 10px;
             overflow-x: auto;
-            padding: 20px 10px;
+            padding: 20px 12px;
             background: #2b2b2b;
             border-radius: 10px;
             border: 2px solid var(--gold);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            scroll-behavior: smooth;
         }
 
         .wagon {
-            min-width: 145px;
+            min-width: 150px;
             background: var(--bordeaux);
             color: var(--white);
-            padding: 12px;
+            padding: 12px 10px;
             border-radius: 6px;
             border: 2px solid var(--gold);
             text-align: center;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
             font-family: Arial, sans-serif;
             font-size: 0.85rem;
+            position: relative;
+            flex-shrink: 0;
         }
 
         .wagon:hover {
             transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(212, 175, 55, 0.35);
+        }
+
+        .wagon.active-wagon {
+            outline: 3px solid var(--gold-light);
+            transform: translateY(-4px);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
         }
 
         .wagon.loco {
@@ -245,8 +255,13 @@
             background: #7b1fa2;
         }
 
+        .wagon.bagage {
+            background: #3d3d3d;
+        }
+
         .wagon.special-no-kids {
             border-color: #4fc3f7;
+            background: #3b1c32;
         }
 
         .wagon.special-ladies {
@@ -254,14 +269,56 @@
             background: #6a1b4d;
         }
 
+        .wagon.sold-out {
+            opacity: 0.6;
+            border-color: var(--error);
+        }
+
+        .wagon-number {
+            font-size: 0.7rem;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 3px;
+        }
+
         .wagon-tag {
             display: inline-block;
             margin-top: 6px;
-            padding: 2px 6px;
+            padding: 3px 7px;
             border-radius: 4px;
             font-size: 0.72rem;
             font-weight: bold;
             background: rgba(255,255,255,0.2);
+        }
+
+        /* Interactief Rijtuig-informatiepaneel */
+        .wagon-detail-panel {
+            background: var(--white);
+            border: 2px solid var(--gold);
+            border-left: 6px solid var(--bordeaux);
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin-bottom: 25px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .wagon-detail-panel h4 {
+            color: var(--bordeaux);
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+        }
+
+        .wagon-detail-panel p {
+            font-size: 0.92rem;
+            color: #333;
         }
 
         /* Fotokaarten */
@@ -517,10 +574,10 @@
 </head>
 <body>
 
-    <!-- Navigatiebalk met klein rond minilogo.png -->
+    <!-- Navigatiebalk met klein rond minilogo.jpg -->
     <header>
         <div class="brand-container">
-            <img src="minilogo.png" alt="Horizon Express Mini Logo" class="mini-logo-round" onerror="this.src='logo.jpg'">
+            <img src="minilogo.jpg" alt="Horizon Express Mini Logo" class="mini-logo-round" onerror="this.src='logo.jpg'">
             <span class="brand-title">THE HORIZON EXPRESS</span>
         </div>
         <nav>
@@ -537,7 +594,7 @@
 
     <!-- Hero Sectie -->
     <section class="hero">
-        <img src="minilogo.png" alt="The Horizon Express Logo" class="hero-logo" onerror="this.style.display='none'">
+        <img src="minilogo.jpg" alt="The Horizon Express Logo" class="hero-logo" onerror="this.style.display='none'">
         <h1>The Horizon Express</h1>
         <p>Het rijdende sterrenhotel door Europa. 14 dagen, 11 iconische steden en 9 landen in één onvergetelijke reis.</p>
         <div class="badges">
@@ -563,37 +620,155 @@
         </div>
     </section>
 
-    <!-- Interactieve Trein & Speciale Couchettes -->
+    <!-- Interactieve Trein & Speciale Couchettes (Alle 17 eenheden los uitgewerkt) -->
     <section id="trein" class="container" style="background-color: #f3ece0; border-radius: 12px;">
-        <h2 class="section-title">Treinsamenstelling & Couchettes</h2>
-        <p class="section-subtitle">Onze 17-delige chartertrein met specifieke rijtuigen voor elk reisgezelschap.</p>
+        <h2 class="section-title">Interactieve Treinsamenstelling (17 Eenheden)</h2>
+        <p class="section-subtitle">Scroll door de volledige trein en klik op een rijtuig om het direct te bekijken of te selecteren voor uw boeking.</p>
 
-        <div class="train-scroller">
-            <div class="wagon loco"><strong>LOC 1</strong><br>Siemens Vectron MS<span class="wagon-tag">Tractie</span></div>
-            <div class="wagon special-no-kids"><strong>Couchette 1</strong><br>UIC-X Bcvmh<span class="wagon-tag">Standaard Zonder Kinderen</span></div>
-            <div class="wagon"><strong>Couchette 2 t/m 5</strong><br>UIC-X Bcvmh<span class="wagon-tag">Standaard All-In</span></div>
-            <div class="wagon special-ladies"><strong>Couchette 6</strong><br>UIC-X Bcvmh<span class="wagon-tag">Alleen Vrouwen (+€50)</span></div>
-            <div class="wagon resto"><strong>Restauratie 1 & 2</strong><br>Bordeaux-Rood<span class="wagon-tag">VIP Max. 30 pl. (+€150)</span></div>
-            <div class="wagon"><strong>Couchette 7 t/m 10</strong><br>UIC-X Bcvmh<span class="wagon-tag">Standaard All-In</span></div>
-            <div class="wagon special-no-kids"><strong>Couchette 11</strong><br>UIC-X Bcvmh<span class="wagon-tag">Standaard Zonder Kinderen</span></div>
-            <div class="wagon"><strong>Couchette 12 + Bagage</strong><br>Bcvmh + Dms<span class="wagon-tag">Comfort & Koffers</span></div>
-            <div class="wagon loco"><strong>LOC 2</strong><br>Siemens Vectron MS<span class="wagon-tag">Tractie</span></div>
+        <div class="train-scroller" id="trainScroller">
+            <!-- Eenheid 1: Locomotief 1 -->
+            <div class="wagon loco" data-type="loco" data-title="Locomotief 1 — Siemens Vectron MS" data-desc="Meerspanningslocomotief (voorzijde) voor naadloze grensovergangen door alle 9 Europese landen.">
+                <span class="wagon-number">Eenheid 1</span>
+                <strong>LOC 1</strong><br>Siemens Vectron MS
+                <span class="wagon-tag">Tractie Voor</span>
+            </div>
+
+            <!-- Eenheid 2: Couchette 1 (Non-Kids) -->
+            <div class="wagon special-no-kids" data-couchette="1" id="wagon-c1">
+                <span class="wagon-number">Eenheid 2</span>
+                <strong>Couchette 1</strong><br>Non-Kids Rijtuig
+                <span class="wagon-tag" id="tag-c1">Geen kinderen (+€300 p.p.)</span>
+            </div>
+
+            <!-- Eenheid 3: Couchette 2 -->
+            <div class="wagon active-wagon" data-couchette="2">
+                <span class="wagon-number">Eenheid 3</span>
+                <strong>Couchette 2</strong><br>UIC-X Bcvmh
+                <span class="wagon-tag">Standaard All-In</span>
+            </div>
+
+            <!-- Eenheid 4: Couchette 3 -->
+            <div class="wagon" data-couchette="3">
+                <span class="wagon-number">Eenheid 4</span>
+                <strong>Couchette 3</strong><br>UIC-X Bcvmh
+                <span class="wagon-tag">Standaard All-In</span>
+            </div>
+
+            <!-- Eenheid 5: Couchette 4 -->
+            <div class="wagon" data-couchette="4">
+                <span class="wagon-number">Eenheid 5</span>
+                <strong>Couchette 4</strong><br>UIC-X Bcvmh
+                <span class="wagon-tag">Standaard All-In</span>
+            </div>
+
+            <!-- Eenheid 6: Couchette 5 -->
+            <div class="wagon" data-couchette="5">
+                <span class="wagon-number">Eenheid 6</span>
+                <strong>Couchette 5</strong><br>UIC-X Bcvmh
+                <span class="wagon-tag">Standaard All-In</span>
+            </div>
+
+            <!-- Eenheid 7: Restauratierijtuig 1 -->
+            <div class="wagon resto" data-type="resto1" data-title="Restauratierijtuig 1 — Bordeaux-Rood" data-desc="Klassiek bordeauxrood restauratierijtuig voor ontbijt, lunch, diner en panoramisch uitzicht (direct grenzend aan het Vrouwenrijtuig).">
+                <span class="wagon-number">Eenheid 7</span>
+                <strong>Restauratie 1</strong><br>Bordeaux-Rood
+                <span class="wagon-tag">Diner & Lounge</span>
+            </div>
+
+            <!-- Eenheid 8: Couchette 6 (Vrouwenrijtuig - Tussen de 2 restauratierijtuigen in!) -->
+            <div class="wagon special-ladies" data-couchette="6">
+                <span class="wagon-number">Eenheid 8</span>
+                <strong>Couchette 6</strong><br>Vrouwenrijtuig
+                <span class="wagon-tag">Alleen Vrouwen (+€50)</span>
+            </div>
+
+            <!-- Eenheid 9: Restauratierijtuig 2 -->
+            <div class="wagon resto" data-type="resto2" data-title="Restauratierijtuig 2 — VIP-Restaurant" data-desc="Tweede bordeauxrode restauratierijtuig met het exclusieve VIP-gedeelte (max. 30 plaatsen, + € 150,00 toeslag). Ligt direct aan de andere zijde van het Vrouwenrijtuig.">
+                <span class="wagon-number">Eenheid 9</span>
+                <strong>Restauratie 2</strong><br>Bordeaux-Rood VIP
+                <span class="wagon-tag">VIP Max. 30 pl. (+€150)</span>
+            </div>
+
+            <!-- Eenheid 10: Couchette 7 -->
+            <div class="wagon" data-couchette="7">
+                <span class="wagon-number">Eenheid 10</span>
+                <strong>Couchette 7</strong><br>UIC-X Bcvmh
+                <span class="wagon-tag">Standaard All-In</span>
+            </div>
+
+            <!-- Eenheid 11: Couchette 8 -->
+            <div class="wagon" data-couchette="8">
+                <span class="wagon-number">Eenheid 11</span>
+                <strong>Couchette 8</strong><br>UIC-X Bcvmh
+                <span class="wagon-tag">Standaard All-In</span>
+            </div>
+
+            <!-- Eenheid 12: Couchette 9 -->
+            <div class="wagon" data-couchette="9">
+                <span class="wagon-number">Eenheid 12</span>
+                <strong>Couchette 9</strong><br>UIC-X Bcvmh
+                <span class="wagon-tag">Standaard All-In</span>
+            </div>
+
+            <!-- Eenheid 13: Couchette 10 -->
+            <div class="wagon" data-couchette="10">
+                <span class="wagon-number">Eenheid 13</span>
+                <strong>Couchette 10</strong><br>UIC-X Bcvmh
+                <span class="wagon-tag">Standaard All-In</span>
+            </div>
+
+            <!-- Eenheid 14: Couchette 11 (Non-Kids) -->
+            <div class="wagon special-no-kids" data-couchette="11" id="wagon-c11">
+                <span class="wagon-number">Eenheid 14</span>
+                <strong>Couchette 11</strong><br>Non-Kids Rijtuig
+                <span class="wagon-tag" id="tag-c11">Geen kinderen (+€300 p.p.)</span>
+            </div>
+
+            <!-- Eenheid 15: Couchette 12 -->
+            <div class="wagon" data-couchette="12">
+                <span class="wagon-number">Eenheid 15</span>
+                <strong>Couchette 12</strong><br>UIC-X Bcvmh
+                <span class="wagon-tag">Standaard All-In</span>
+            </div>
+
+            <!-- Eenheid 16: Bagagerijtuig Dms -->
+            <div class="wagon bagage" data-type="bagage" data-title="Bagagerijtuig — UIC-X Dms" data-desc="Speciaal bagagerijtuig voor grote koffers, reistassen en technische uitrusting gedurende de 14-daagse reis.">
+                <span class="wagon-number">Eenheid 16</span>
+                <strong>Bagagerijtuig</strong><br>UIC-X Dms
+                <span class="wagon-tag">Koffers & Opslag</span>
+            </div>
+
+            <!-- Eenheid 17: Locomotief 2 -->
+            <div class="wagon loco" data-type="loco" data-title="Locomotief 2 — Siemens Vectron MS" data-desc="Tweede Siemens Vectron MS locomotief (achterzijde) voor extra trekkracht op bergtrajecten in Zwitserland en Oostenrijk en snel kopmaken op kopstations.">
+                <span class="wagon-number">Eenheid 17</span>
+                <strong>LOC 2</strong><br>Siemens Vectron MS
+                <span class="wagon-tag">Tractie Achter</span>
+            </div>
+        </div>
+
+        <!-- Interactief detailpaneel onder de trein -->
+        <div class="wagon-detail-panel" id="wagonDetailPanel">
+            <div>
+                <h4 id="detailTitle">Geselecteerd: Couchette 2 — Standaard Comfort (UIC-X Bcvmh)</h4>
+                <p id="detailDesc">Comfortabel slaaprijtuig inbegrepen in de standaard All-In prijs van € 1.000,00 p.p.</p>
+            </div>
+            <a href="#boeken" class="btn-gold" style="padding: 10px 20px; font-size: 0.95rem;">Boek dit rijtuig ↓</a>
         </div>
 
         <div class="cards-grid" id="restaurant">
             <div class="info-card">
                 <img src="couchette.jpg" alt="Couchette Rijtuig" onerror="this.src='vectron.jpg'">
                 <div class="info-card-body">
-                    <h3>Speciale Couchettes (1, 6 en 11)</h3>
-                    <p><strong>Couchette 1 & 11:</strong> Standaard ingesteld als rustrijtuig <em>zonder kinderen</em>. Wilt u toch kinderen meenemen in Couchette 1 of 11? Dan geldt er een toeslag van <strong>€ 300,00</strong>.</p>
-                    <p style="margin-top:8px;"><strong>Couchette 6 (Ladies Only):</strong> Uitsluitend beschikbaar voor vrouwelijke reizigers, met een toeslag van <strong>€ 50,00</strong>.</p>
+                    <h3>Speciale Rijtuigen (1, 6 en 11)</h3>
+                    <p><strong>Couchette 1 & 11 (Non-Kids):</strong> In deze rustrijtuigen zijn <em>geen kinderen toegestaan</em>. Voor een slaapplaats in deze rijtuigen geldt een toeslag van <strong>€ 300,00 per persoon</strong> en een maximale capaciteit van 24 plaatsen per rijtuig (<strong>vol = vol</strong>).</p>
+                    <p style="margin-top:8px;"><strong>Couchette 6 (Vrouwenrijtuig):</strong> Veilig en centraal gelegen precies tussen de twee restauratierijtuigen in. Uitsluitend beschikbaar voor vrouwen, met een toeslag van <strong>€ 50,00</strong>.</p>
                 </div>
             </div>
             <div class="info-card">
                 <img src="resto.png" alt="VIP Restaurant" onerror="this.src='interieur.jpg'">
                 <div class="info-card-body">
-                    <h3>VIP-Restaurant (Max. 30 plaatsen)</h3>
-                    <p>Geniet van culinaire topgerechten in ons exclusieve VIP-gedeelte van het bordeauxrode restauratierijtuig. Er zijn maximaal <strong>30 plaatsen</strong> beschikbaar tegen een toeslag van <strong>€ 150,00</strong>.</p>
+                    <h3>Twee Restauratierijtuigen & VIP (Max. 30 plaatsen)</h3>
+                    <p>De trein beschikt over twee losse bordeauxrode restauratierijtuigen (Eenheid 7 en Eenheid 9), met daartussenin het vrouwenrijtuig. Voor ons exclusieve VIP-restaurant geldt een maximale capaciteit van <strong>30 plaatsen</strong> en een toeslag van <strong>€ 150,00</strong>.</p>
                 </div>
             </div>
         </div>
@@ -637,34 +812,41 @@
                 <div class="form-group">
                     <label for="couchetteSelect">Kies uw Couchette-rijtuig (1 t/m 12) *</label>
                     <select id="couchetteSelect">
-                        <option value="1">Couchette 1 — Standaard Zonder Kinderen</option>
+                        <option value="1" id="opt-c1">Couchette 1 — Non-Kids Rijtuig (+ € 300,00 p.p. | Geen kinderen | Nog 24 pl.)</option>
                         <option value="2" selected>Couchette 2 — Standaard Comfort</option>
                         <option value="3">Couchette 3 — Standaard Comfort</option>
                         <option value="4">Couchette 4 — Standaard Comfort</option>
                         <option value="5">Couchette 5 — Standaard Comfort</option>
-                        <option value="6">Couchette 6 — Uitsluitend voor Vrouwen (+ € 50,00)</option>
+                        <option value="6">Couchette 6 — Vrouwenrijtuig tussen Restauraties (+ € 50,00)</option>
                         <option value="7">Couchette 7 — Standaard Comfort</option>
                         <option value="8">Couchette 8 — Standaard Comfort</option>
                         <option value="9">Couchette 9 — Standaard Comfort</option>
                         <option value="10">Couchette 10 — Standaard Comfort</option>
-                        <option value="11">Couchette 11 — Standaard Zonder Kinderen</option>
+                        <option value="11" id="opt-c11">Couchette 11 — Non-Kids Rijtuig (+ € 300,00 p.p. | Geen kinderen | Nog 24 pl.)</option>
                         <option value="12">Couchette 12 — Standaard Comfort</option>
                     </select>
                 </div>
 
-                <!-- Dynamische Optie voor Couchette 1 en 11 (Standaard zonder kinderen, met kinderen + € 300) -->
+                <!-- Dynamische Box voor Non-Kids Couchette 1 en 11 (Geen kinderen toegestaan, + € 300 p.p., Vol = Vol) -->
                 <div id="noKidsBox" class="special-option-box" style="display: none;">
-                    <strong>ℹ️ Couchette 1 & 11: Standaard ingesteld als 'Zonder kinderen'</strong>
-                    <p style="margin: 6px 0;">Dit rijtuig is standaard gereserveerd voor reizigers zonder kinderen.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+                        <strong>🔕 Non-Kids Rijtuig (Couchette 1 & 11) — Geen kinderen toegestaan</strong>
+                        <span class="capacity-badge" id="nonKidsCapacityBadge">Nog 24 / 24 plaatsen vrij (Vol = Vol)</span>
+                    </div>
+                    <p style="margin: 6px 0;">
+                        In dit rustrijtuig zijn <strong>geen kinderen toegestaan</strong>. Voor een slaapplaats in dit rijtuig geldt een vaste toeslag van <strong>€ 300,00 per persoon</strong> en een maximale capaciteit (vol = vol).
+                    </p>
                     <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-top: 8px;">
-                        <input type="checkbox" id="withKidsFeeCheckbox">
-                        <span>Ik wens toch kinderen mee te nemen in deze couchette (<strong>+ € 300,00 toeslag</strong>)</span>
+                        <input type="checkbox" id="noKidsConfirmCheckbox">
+                        <span>Ik bevestig dat er <strong>geen kinderen</strong> meereizen in deze boeking en ga akkoord met de toeslag van € 300,00 p.p. *</span>
                     </label>
+                    <div class="error-msg" id="noKidsError">Bevestig alstublieft dat er geen kinderen meereizen in het Non-Kids rijtuig.</div>
+                    <div class="error-msg" id="noKidsCapError">Er zijn niet genoeg vrije slaapplaatsen meer in dit Non-Kids rijtuig (Vol = Vol).</div>
                 </div>
 
                 <!-- Dynamische Optie voor Couchette 6 (Alleen voor vrouwen + € 50) -->
                 <div id="ladiesOnlyBox" class="special-option-box" style="display: none; background: #fce4ec; border-left-color: #d81b60;">
-                    <strong>👩 Couchette 6: Uitsluitend beschikbaar voor vrouwen (+ € 50,00 toeslag)</strong>
+                    <strong>👩 Couchette 6 (Tussen Restauratie 1 & 2): Uitsluitend voor vrouwen (+ € 50,00 toeslag)</strong>
                     <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-top: 8px;">
                         <input type="checkbox" id="ladiesConfirmCheckbox">
                         <span>Ik bevestig dat alle reizigers in deze boeking vrouw zijn (verplicht voor Couchette 6) *</span>
@@ -674,7 +856,7 @@
 
                 <!-- VIP-restaurant optie (+ € 150, max 30 beschikbare plaatsen) -->
                 <div class="vip-box">
-                    <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+                    <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; flex-wrap: wrap; gap: 6px;">
                         <span>
                             <input type="checkbox" id="vipRestaurantCheckbox">
                             <strong>VIP-Restaurant arrangement (+ € 150,00 toeslag)</strong>
@@ -737,9 +919,9 @@
                     <span>Basisprijs (<span id="summaryPax">2</span>x € 1.000,00):</span>
                     <strong id="summaryBasePrice">€ 2.000,00</strong>
                 </div>
-                <div class="price-row" id="rowKidsFee" style="display: none;">
-                    <span>Toeslag kinderen (Couchette 1/11):</span>
-                    <strong>€ 300,00</strong>
+                <div class="price-row" id="rowNonKidsFee" style="display: none;">
+                    <span>Toeslag Non-Kids (<span id="summaryNonKidsPax">2</span>x € 300,00):</span>
+                    <strong id="summaryNonKidsFee">€ 600,00</strong>
                 </div>
                 <div class="price-row" id="rowLadiesFee" style="display: none;">
                     <span>Toeslag Couchette 6 (Vrouwen):</span>
@@ -765,15 +947,15 @@
         <h2 class="section-title">Algemene Voorwaarden</h2>
         <div class="info-card" style="padding: 25px; font-family: Arial, sans-serif; font-size: 0.95rem;">
             <p><strong>1. All-In Tarief & Betaling:</strong> De basisprijs bedraagt € 1.000,00 per persoon voor de volledige 14-daagse treinreis (vertrek 31 juli 2027). Na reservering ontvangt u een persoonlijke betaallink per e-mail.</p>
-            <p style="margin-top:8px;"><strong>2. Couchette 1 & 11 (Standaard zonder kinderen):</strong> Rijtuigen 1 en 11 zijn standaard zonder kinderen. Indien de klant kiest om hier wel kinderen mee te nemen, geldt een verplichte toeslag van € 300,00.</p>
-            <p style="margin-top:8px;"><strong>3. Couchette 6 (Uitsluitend voor vrouwen):</strong> Couchette 6 is exclusief toegankelijk voor vrouwelijke reizigers en kent een toeslag van € 50,00.</p>
+            <p style="margin-top:8px;"><strong>2. Couchette 1 & 11 (Non-Kids Rijtuigen — Vol = Vol):</strong> In rijtuigen 1 en 11 zijn <strong>geen kinderen toegestaan</strong>. Voor een slaapplaats in deze rijtuigen geldt een verplichte toeslag van € 300,00 per persoon en een maximale capaciteit van 24 plaatsen per rijtuig (vol = vol).</p>
+            <p style="margin-top:8px;"><strong>3. Couchette 6 (Vrouwenrijtuig):</strong> Couchette 6 bevindt zich tussen de twee restauratierijtuigen in, is exclusief toegankelijk voor vrouwelijke reizigers en kent een toeslag van € 50,00.</p>
             <p style="margin-top:8px;"><strong>4. VIP-Restaurant:</strong> Het VIP-restaurant biedt plaats aan maximaal 30 gasten tegen een toeslag van € 150,00.</p>
         </div>
     </section>
 
     <!-- Contact & Footer -->
     <footer id="contact">
-        <img src="minilogo.png" alt="Mini Logo" class="mini-logo-round" style="margin-bottom: 10px;" onerror="this.style.display='none'">
+        <img src="minilogo.jpg" alt="Mini Logo" class="mini-logo-round" style="margin-bottom: 10px;" onerror="this.style.display='none'">
         <h3 style="color: var(--gold); margin-bottom: 10px;">The Horizon Express — Contactgegevens</h3>
         <p><strong>Contactpersoon:</strong> Philip Sluijs</p>
         <p><strong>Adres:</strong> Noordersingel 4, 3755 EZ Eemnes</p>
@@ -782,10 +964,10 @@
     </footer>
 
     <script>
-        /* 1. Maak minilogo.png automatisch rond als Favicon in het browsertabblad */
+        /* 1. Maak minilogo.jpg automatisch rond als Favicon in het browsertabblad */
         (function makeCircularFavicon() {
             const img = new Image();
-            img.src = 'minilogo.png';
+            img.src = 'minilogo.jpg';
             img.onload = function() {
                 const canvas = document.createElement('canvas');
                 canvas.width = 64;
@@ -809,18 +991,68 @@
             this.value = this.value.replace(/[^0-9]/g, '');
         });
 
-        /* 3. Capaciteit VIP-restaurant (max. 30 plaatsen) */
+        /* 3. Capaciteiten bijhouden (VIP max 30, Non-Kids Couchette 1 & 11 elk max 24: Vol = Vol) */
         let vipAvailableSeats = 30;
+        const nonKidsCapacity = {
+            '1': 24,
+            '11': 24
+        };
+
         const vipCapacityBadge = document.getElementById('vipCapacityBadge');
+        const nonKidsCapacityBadge = document.getElementById('nonKidsCapacityBadge');
 
         /* 4. Formulierelementen & Prijsberekening */
         const passengersInput = document.getElementById('passengers');
         const couchetteSelect = document.getElementById('couchetteSelect');
         const noKidsBox = document.getElementById('noKidsBox');
-        const withKidsFeeCheckbox = document.getElementById('withKidsFeeCheckbox');
+        const noKidsConfirmCheckbox = document.getElementById('noKidsConfirmCheckbox');
         const ladiesOnlyBox = document.getElementById('ladiesOnlyBox');
         const ladiesConfirmCheckbox = document.getElementById('ladiesConfirmCheckbox');
         const vipRestaurantCheckbox = document.getElementById('vipRestaurantCheckbox');
+        const detailTitle = document.getElementById('detailTitle');
+        const detailDesc = document.getElementById('detailDesc');
+
+        function updateCapacityLabels() {
+            // Update dropdown teksten en trein-tags voor Couchette 1 & 11
+            ['1', '11'].forEach(function(nr) {
+                const vrij = nonKidsCapacity[nr];
+                const opt = document.getElementById('opt-c' + nr);
+                const tag = document.getElementById('tag-c' + nr);
+                const wagonEl = document.getElementById('wagon-c' + nr);
+
+                if (vrij <= 0) {
+                    opt.textContent = 'Couchette ' + nr + ' — Non-Kids Rijtuig (VOL = VOL / Uitverkocht)';
+                    opt.disabled = true;
+                    tag.textContent = 'VOL = VOL (0 vrij)';
+                    wagonEl.classList.add('sold-out');
+                } else {
+                    opt.textContent = 'Couchette ' + nr + ' — Non-Kids Rijtuig (+ € 300,00 p.p. | Geen kinderen | Nog ' + vrij + ' pl.)';
+                    opt.disabled = false;
+                    tag.textContent = 'Non-Kids: nog ' + vrij + ' pl. (+€300 p.p.)';
+                }
+            });
+        }
+
+        function highlightWagonInScroller(couchetteVal) {
+            document.querySelectorAll('#trainScroller .wagon').forEach(function(w) {
+                w.classList.remove('active-wagon');
+                if (w.getAttribute('data-couchette') === String(couchetteVal)) {
+                    w.classList.add('active-wagon');
+                }
+            });
+
+            if (couchetteVal === '1' || couchetteVal === '11') {
+                const vrij = nonKidsCapacity[couchetteVal];
+                detailTitle.textContent = 'Geselecteerd: Couchette ' + couchetteVal + ' — Non-Kids Rijtuig (Geen kinderen toegestaan)';
+                detailDesc.textContent = 'Exclusief rustrijtuig voor volwassenen. Toeslag: € 300,00 per persoon. Beschikbaarheid: nog ' + vrij + ' van de 24 slaapplaatsen vrij (Vol = Vol).';
+            } else if (couchetteVal === '6') {
+                detailTitle.textContent = 'Geselecteerd: Couchette 6 — Vrouwenrijtuig (Tussen Restauratie 1 en 2)';
+                detailDesc.textContent = 'Veilig en centraal gelegen tussen beide restauratierijtuigen in. Uitsluitend voor vrouwelijke reizigers (+ € 50,00 toeslag).';
+            } else {
+                detailTitle.textContent = 'Geselecteerd: Couchette ' + couchetteVal + ' — Standaard Comfort (UIC-X Bcvmh)';
+                detailDesc.textContent = 'Comfortabel slaaprijtuig inbegrepen in de standaard All-In prijs van € 1.000,00 p.p.';
+            }
+        }
 
         function updateFormAndPrice() {
             let pax = parseInt(passengersInput.value, 10) || 1;
@@ -829,12 +1061,18 @@
 
             const couchette = couchetteSelect.value;
 
-            // Couchette 1 en 11: Standaard zonder kinderen, optie voor kinderen (+ € 300)
+            // Couchette 1 en 11: Non-Kids (Geen kinderen toegestaan, + € 300 per persoon, max capaciteit)
             if (couchette === '1' || couchette === '11') {
                 noKidsBox.style.display = 'block';
+                const resterend = nonKidsCapacity[couchette];
+                nonKidsCapacityBadge.textContent = resterend > 0
+                    ? 'Couchette ' + couchette + ': nog ' + resterend + ' / 24 vrij (Vol = Vol)'
+                    : 'Couchette ' + couchette + ': VOL = VOL (0 vrij)';
             } else {
                 noKidsBox.style.display = 'none';
-                withKidsFeeCheckbox.checked = false;
+                noKidsConfirmCheckbox.checked = false;
+                document.getElementById('noKidsError').style.display = 'none';
+                document.getElementById('noKidsCapError').style.display = 'none';
             }
 
             // Couchette 6: Uitsluitend voor vrouwen (+ € 50)
@@ -843,36 +1081,70 @@
             } else {
                 ladiesOnlyBox.style.display = 'none';
                 ladiesConfirmCheckbox.checked = false;
+                document.getElementById('ladiesError').style.display = 'none';
             }
 
             // Bereken kosten
             const basePrice = pax * 1000;
-            const kidsFee = ( (couchette === '1' || couchette === '11') && withKidsFeeCheckbox.checked ) ? 300 : 0;
+            const isNonKids = (couchette === '1' || couchette === '11');
+            const nonKidsFee = isNonKids ? (pax * 300) : 0;
             const ladiesFee = (couchette === '6') ? 50 : 0;
             const vipFee = vipRestaurantCheckbox.checked ? 150 : 0;
-            const total = basePrice + kidsFee + ladiesFee + vipFee;
+            const total = basePrice + nonKidsFee + ladiesFee + vipFee;
 
             // Update samenvatting
             let couchetteLabel = 'Couchette ' + couchette;
-            if (couchette === '1' || couchette === '11') {
-                couchetteLabel += withKidsFeeCheckbox.checked ? ' (Met kinderen)' : ' (Zonder kinderen)';
+            if (isNonKids) {
+                couchetteLabel += ' (Non-Kids)';
             } else if (couchette === '6') {
-                couchetteLabel += ' (Alleen vrouwen)';
+                couchetteLabel += ' (Vrouwenrijtuig)';
             }
 
             document.getElementById('summaryCouchette').textContent = couchetteLabel;
             document.getElementById('summaryPax').textContent = pax;
             document.getElementById('summaryBasePrice').textContent = '€ ' + basePrice.toLocaleString('nl-NL') + ',00';
 
-            document.getElementById('rowKidsFee').style.display = kidsFee > 0 ? 'flex' : 'none';
+            const rowNonKidsFee = document.getElementById('rowNonKidsFee');
+            if (isNonKids) {
+                rowNonKidsFee.style.display = 'flex';
+                document.getElementById('summaryNonKidsPax').textContent = pax;
+                document.getElementById('summaryNonKidsFee').textContent = '€ ' + nonKidsFee.toLocaleString('nl-NL') + ',00';
+            } else {
+                rowNonKidsFee.style.display = 'none';
+            }
+
             document.getElementById('rowLadiesFee').style.display = ladiesFee > 0 ? 'flex' : 'none';
             document.getElementById('rowVipFee').style.display = vipFee > 0 ? 'flex' : 'none';
             document.getElementById('summaryTotal').textContent = '€ ' + total.toLocaleString('nl-NL') + ',00';
+
+            highlightWagonInScroller(couchette);
         }
+
+        /* Klik-interactie op de 17 rijtuigen in de trein-scroller */
+        document.querySelectorAll('#trainScroller .wagon').forEach(function(wagon) {
+            wagon.addEventListener('click', function() {
+                const couchetteNr = this.getAttribute('data-couchette');
+                if (couchetteNr) {
+                    if ((couchetteNr === '1' || couchetteNr === '11') && nonKidsCapacity[couchetteNr] <= 0) {
+                        detailTitle.textContent = 'Couchette ' + couchetteNr + ' — VOL = VOL (Uitverkocht)';
+                        detailDesc.textContent = 'Dit Non-Kids rijtuig heeft de maximale capaciteit bereikt. Kies alstublieft een ander rijtuig.';
+                        return;
+                    }
+                    couchetteSelect.value = couchetteNr;
+                    updateFormAndPrice();
+                } else {
+                    document.querySelectorAll('#trainScroller .wagon').forEach(function(w) {
+                        w.classList.remove('active-wagon');
+                    });
+                    this.classList.add('active-wagon');
+                    detailTitle.textContent = this.getAttribute('data-title');
+                    detailDesc.textContent = this.getAttribute('data-desc');
+                }
+            });
+        });
 
         passengersInput.addEventListener('input', updateFormAndPrice);
         couchetteSelect.addEventListener('change', updateFormAndPrice);
-        withKidsFeeCheckbox.addEventListener('change', updateFormAndPrice);
         vipRestaurantCheckbox.addEventListener('change', updateFormAndPrice);
 
         /* 5. Interactieve reCAPTCHA ("Ik ben geen robot"-vinkje) */
@@ -929,8 +1201,32 @@
                 phoneError.style.display = 'none';
             }
 
-            // Couchette 6 vrouwen-check
             const couchette = couchetteSelect.value;
+            const pax = parseInt(passengersInput.value, 10) || 1;
+
+            // Non-Kids Couchette 1 & 11 check: geen kinderen toegestaan + maximale capaciteit (vol = vol)
+            const noKidsError = document.getElementById('noKidsError');
+            const noKidsCapError = document.getElementById('noKidsCapError');
+            if (couchette === '1' || couchette === '11') {
+                if (!noKidsConfirmCheckbox.checked) {
+                    noKidsError.style.display = 'block';
+                    valid = false;
+                } else {
+                    noKidsError.style.display = 'none';
+                }
+
+                if (pax > nonKidsCapacity[couchette]) {
+                    noKidsCapError.style.display = 'block';
+                    valid = false;
+                } else {
+                    noKidsCapError.style.display = 'none';
+                }
+            } else {
+                noKidsError.style.display = 'none';
+                noKidsCapError.style.display = 'none';
+            }
+
+            // Couchette 6 vrouwen-check
             const ladiesError = document.getElementById('ladiesError');
             if (couchette === '6' && !ladiesConfirmCheckbox.checked) {
                 ladiesError.style.display = 'block';
@@ -940,7 +1236,6 @@
             }
 
             // VIP-restaurant capaciteitscheck (max 30 plaatsen)
-            const pax = parseInt(passengersInput.value, 10) || 1;
             const vipError = document.getElementById('vipError');
             if (vipRestaurantCheckbox.checked && pax > vipAvailableSeats) {
                 vipError.style.display = 'block';
@@ -968,6 +1263,13 @@
 
             if (!valid) return;
 
+            // Werk Non-Kids capaciteit bij indien Couchette 1 of 11 is geboekt (Vol = Vol)
+            if (couchette === '1' || couchette === '11') {
+                nonKidsCapacity[couchette] -= pax;
+                updateCapacityLabels();
+                updateFormAndPrice();
+            }
+
             // Werk VIP-restaurant capaciteit bij indien gekozen
             if (vipRestaurantCheckbox.checked) {
                 vipAvailableSeats -= pax;
@@ -989,7 +1291,8 @@
             `;
         });
 
-        // Initialiseer prijs bij laden
+        // Initialiseer labels en prijs bij laden
+        updateCapacityLabels();
         updateFormAndPrice();
     </script>
 </body>
