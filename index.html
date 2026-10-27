@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Horizon Express | De Ultieme Europese Treincharter</title>
     
-    <!-- Favicon (Tabblad-icoon) met minilogo.jpg -->
-    <link id="dynamic-favicon" rel="icon" type="image/jpeg" href="minilogo.jpg">
+    <!-- Favicon (Tabblad-icoon) met minilogo.png -->
+    <link id="dynamic-favicon" rel="icon" type="image/png" href="minilogo.png">
 
     <style>
         :root {
@@ -34,7 +34,7 @@
             line-height: 1.6;
         }
 
-        /* Navigatiebalk met rond minilogo */
+        /* Navigatiebalk met rond minilogo.png */
         header {
             background: linear-gradient(135deg, var(--bordeaux-dark), var(--bordeaux));
             color: var(--white);
@@ -247,32 +247,12 @@
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
         }
 
-        .wagon.loco {
-            background: #1f3a60;
-        }
-
-        .wagon.resto {
-            background: #7b1fa2;
-        }
-
-        .wagon.bagage {
-            background: #3d3d3d;
-        }
-
-        .wagon.special-no-kids {
-            border-color: #4fc3f7;
-            background: #3b1c32;
-        }
-
-        .wagon.special-ladies {
-            border-color: #f48fb1;
-            background: #6a1b4d;
-        }
-
-        .wagon.sold-out {
-            opacity: 0.6;
-            border-color: var(--error);
-        }
+        .wagon.loco { background: #1f3a60; }
+        .wagon.resto { background: #7b1fa2; }
+        .wagon.bagage { background: #3d3d3d; }
+        .wagon.special-no-kids { border-color: #4fc3f7; background: #3b1c32; }
+        .wagon.special-ladies { border-color: #f48fb1; background: #6a1b4d; }
+        .wagon.sold-out { opacity: 0.6; border-color: var(--error); }
 
         .wagon-number {
             font-size: 0.7rem;
@@ -366,9 +346,7 @@
         }
 
         @media (max-width: 850px) {
-            .booking-wrapper {
-                grid-template-columns: 1fr;
-            }
+            .booking-wrapper { grid-template-columns: 1fr; }
         }
 
         .form-group {
@@ -489,9 +467,7 @@
             font-weight: bold;
         }
 
-        .recaptcha-checkbox.checked .recaptcha-checkmark {
-            display: block;
-        }
+        .recaptcha-checkbox.checked .recaptcha-checkmark { display: block; }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -567,17 +543,15 @@
             font-family: Arial, sans-serif;
         }
 
-        footer a {
-            color: var(--gold);
-        }
+        footer a { color: var(--gold); }
     </style>
 </head>
 <body>
 
-    <!-- Navigatiebalk met klein rond minilogo.jpg -->
+    <!-- Navigatiebalk met rond minilogo.png -->
     <header>
         <div class="brand-container">
-            <img src="minilogo.jpg" alt="Horizon Express Mini Logo" class="mini-logo-round" onerror="this.src='logo.jpg'">
+            <img src="minilogo.png" alt="Horizon Express Mini Logo" class="mini-logo-round" onerror="this.style.display='none'">
             <span class="brand-title">THE HORIZON EXPRESS</span>
         </div>
         <nav>
@@ -594,7 +568,7 @@
 
     <!-- Hero Sectie -->
     <section class="hero">
-        <img src="minilogo.jpg" alt="The Horizon Express Logo" class="hero-logo" onerror="this.style.display='none'">
+        <img src="minilogo.png" alt="The Horizon Express Logo" class="hero-logo" onerror="this.style.display='none'">
         <h1>The Horizon Express</h1>
         <p>Het rijdende sterrenhotel door Europa. 14 dagen, 11 iconische steden en 9 landen in één onvergetelijke reis.</p>
         <div class="badges">
@@ -620,7 +594,7 @@
         </div>
     </section>
 
-    <!-- Interactieve Trein & Speciale Couchettes (Alle 17 eenheden los uitgewerkt) -->
+    <!-- Interactieve Treinsamenstelling (17 Eenheden) -->
     <section id="trein" class="container" style="background-color: #f3ece0; border-radius: 12px;">
         <h2 class="section-title">Interactieve Treinsamenstelling (17 Eenheden)</h2>
         <p class="section-subtitle">Scroll door de volledige trein en klik op een rijtuig om het direct te bekijken of te selecteren voor uw boeking.</p>
@@ -760,8 +734,8 @@
                 <img src="couchette.jpg" alt="Couchette Rijtuig" onerror="this.src='vectron.jpg'">
                 <div class="info-card-body">
                     <h3>Speciale Rijtuigen (1, 6 en 11)</h3>
-                    <p><strong>Couchette 1 & 11 (Non-Kids):</strong> In deze rustrijtuigen zijn <em>geen kinderen toegestaan</em>. Voor een slaapplaats in deze rijtuigen geldt een toeslag van <strong>€ 300,00 per persoon</strong> en een maximale capaciteit van 24 plaatsen per rijtuig (<strong>vol = vol</strong>).</p>
-                    <p style="margin-top:8px;"><strong>Couchette 6 (Vrouwenrijtuig):</strong> Veilig en centraal gelegen precies tussen de twee restauratierijtuigen in. Uitsluitend beschikbaar voor vrouwen, met een toeslag van <strong>€ 50,00</strong>.</p>
+                    <p><strong>Couchette 1 & 11 (Non-Kids):</strong> In deze rustrijtuigen zijn <em>geen kinderen toegestaan</em>. Voor een slaapplaats in deze rijtuigen geldt een verplichte toeslag van <strong>€ 300,00 per persoon</strong> en een maximale capaciteit van 24 plaatsen per rijtuig (<strong>vol = vol</strong>).</p>
+                    <p style="margin-top:8px;"><strong>Couchette 6 (Vrouwenrijtuig):</strong> Bevindt zich precies tussen de twee restauratierijtuigen in. Uitsluitend beschikbaar voor vrouwelijke reizigers, met een toeslag van <strong>€ 50,00</strong>.</p>
                 </div>
             </div>
             <div class="info-card">
@@ -827,7 +801,7 @@
                     </select>
                 </div>
 
-                <!-- Dynamische Box voor Non-Kids Couchette 1 en 11 (Geen kinderen toegestaan, + € 300 p.p., Vol = Vol) -->
+                <!-- Dynamische Box voor Non-Kids Couchette 1 en 11 -->
                 <div id="noKidsBox" class="special-option-box" style="display: none;">
                     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
                         <strong>🔕 Non-Kids Rijtuig (Couchette 1 & 11) — Geen kinderen toegestaan</strong>
@@ -844,7 +818,7 @@
                     <div class="error-msg" id="noKidsCapError">Er zijn niet genoeg vrije slaapplaatsen meer in dit Non-Kids rijtuig (Vol = Vol).</div>
                 </div>
 
-                <!-- Dynamische Optie voor Couchette 6 (Alleen voor vrouwen + € 50) -->
+                <!-- Dynamische Optie voor Couchette 6 -->
                 <div id="ladiesOnlyBox" class="special-option-box" style="display: none; background: #fce4ec; border-left-color: #d81b60;">
                     <strong>👩 Couchette 6 (Tussen Restauratie 1 & 2): Uitsluitend voor vrouwen (+ € 50,00 toeslag)</strong>
                     <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-top: 8px;">
@@ -854,7 +828,7 @@
                     <div class="error-msg" id="ladiesError">Bevestig alstublieft dat de reizigers voor Couchette 6 vrouw zijn.</div>
                 </div>
 
-                <!-- VIP-restaurant optie (+ € 150, max 30 beschikbare plaatsen) -->
+                <!-- VIP-restaurant optie -->
                 <div class="vip-box">
                     <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; flex-wrap: wrap; gap: 6px;">
                         <span>
@@ -878,7 +852,7 @@
                     <div class="error-msg" id="termsError">U dient akkoord te gaan met de algemene voorwaarden.</div>
                 </div>
 
-                <!-- reCAPTCHA ("Ik ben geen robot"-vinkje) -->
+                <!-- reCAPTCHA -->
                 <div class="form-group">
                     <div class="recaptcha-box" id="recaptchaBox">
                         <div class="recaptcha-left" id="recaptchaTrigger" role="checkbox" aria-checked="false" tabindex="0">
@@ -893,7 +867,6 @@
                                 <path fill="#4285f4" d="M57.5 51.3l-4.8-4.8A25.3 25.3 0 0 1 32 60a28 28 0 0 1-26.8-20H16L8 30 0 40h3.1a32 32 0 0 0 54.4 11.3z"/>
                             </svg>
                             <div>reCAPTCHA</div>
-                            <div style="font-size: 8px; color: #777;">Privacy - Voorwaarden</div>
                         </div>
                     </div>
                     <div class="error-msg" id="captchaError">Vink eerst 'Ik ben geen robot' aan om verder te gaan.</div>
@@ -955,7 +928,7 @@
 
     <!-- Contact & Footer -->
     <footer id="contact">
-        <img src="minilogo.jpg" alt="Mini Logo" class="mini-logo-round" style="margin-bottom: 10px;" onerror="this.style.display='none'">
+        <img src="minilogo.png" alt="Mini Logo" class="mini-logo-round" style="margin-bottom: 10px;" onerror="this.style.display='none'">
         <h3 style="color: var(--gold); margin-bottom: 10px;">The Horizon Express — Contactgegevens</h3>
         <p><strong>Contactpersoon:</strong> Philip Sluijs</p>
         <p><strong>Adres:</strong> Noordersingel 4, 3755 EZ Eemnes</p>
@@ -964,44 +937,20 @@
     </footer>
 
     <script>
-        /* 1. Maak minilogo.jpg automatisch rond als Favicon in het browsertabblad */
-        (function makeCircularFavicon() {
-            const img = new Image();
-            img.src = 'minilogo.jpg';
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                canvas.width = 64;
-                canvas.height = 64;
-                const ctx = canvas.getContext('2d');
-                ctx.beginPath();
-                ctx.arc(32, 32, 32, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.clip();
-                ctx.drawImage(img, 0, 0, 64, 64);
-                const link = document.getElementById('dynamic-favicon');
-                if (link) {
-                    link.href = canvas.toDataURL('image/png');
-                }
-            };
-        })();
-
-        /* 2. Telefoonnummer: blokkeer alles behalve cijfers (0-9) direct bij het typen */
+        /* 1. Telefoonnummer: blokkeer alles behalve cijfers (0-9) direct bij het typen */
         const phoneInput = document.getElementById('phoneInput');
         phoneInput.addEventListener('input', function() {
             this.value = this.value.replace(/[^0-9]/g, '');
         });
 
-        /* 3. Capaciteiten bijhouden (VIP max 30, Non-Kids Couchette 1 & 11 elk max 24: Vol = Vol) */
+        /* 2. Capaciteiten bijhouden */
         let vipAvailableSeats = 30;
-        const nonKidsCapacity = {
-            '1': 24,
-            '11': 24
-        };
+        const nonKidsCapacity = { '1': 24, '11': 24 };
 
         const vipCapacityBadge = document.getElementById('vipCapacityBadge');
         const nonKidsCapacityBadge = document.getElementById('nonKidsCapacityBadge');
 
-        /* 4. Formulierelementen & Prijsberekening */
+        /* 3. Formulierelementen & Prijsberekening */
         const passengersInput = document.getElementById('passengers');
         const couchetteSelect = document.getElementById('couchetteSelect');
         const noKidsBox = document.getElementById('noKidsBox');
@@ -1013,7 +962,6 @@
         const detailDesc = document.getElementById('detailDesc');
 
         function updateCapacityLabels() {
-            // Update dropdown teksten en trein-tags voor Couchette 1 & 11
             ['1', '11'].forEach(function(nr) {
                 const vrij = nonKidsCapacity[nr];
                 const opt = document.getElementById('opt-c' + nr);
@@ -1023,12 +971,12 @@
                 if (vrij <= 0) {
                     opt.textContent = 'Couchette ' + nr + ' — Non-Kids Rijtuig (VOL = VOL / Uitverkocht)';
                     opt.disabled = true;
-                    tag.textContent = 'VOL = VOL (0 vrij)';
-                    wagonEl.classList.add('sold-out');
+                    if (tag) tag.textContent = 'VOL = VOL (0 vrij)';
+                    if (wagonEl) wagonEl.classList.add('sold-out');
                 } else {
                     opt.textContent = 'Couchette ' + nr + ' — Non-Kids Rijtuig (+ € 300,00 p.p. | Geen kinderen | Nog ' + vrij + ' pl.)';
                     opt.disabled = false;
-                    tag.textContent = 'Non-Kids: nog ' + vrij + ' pl. (+€300 p.p.)';
+                    if (tag) tag.textContent = 'Non-Kids: nog ' + vrij + ' pl. (+€300 p.p.)';
                 }
             });
         }
@@ -1061,7 +1009,6 @@
 
             const couchette = couchetteSelect.value;
 
-            // Couchette 1 en 11: Non-Kids (Geen kinderen toegestaan, + € 300 per persoon, max capaciteit)
             if (couchette === '1' || couchette === '11') {
                 noKidsBox.style.display = 'block';
                 const resterend = nonKidsCapacity[couchette];
@@ -1075,7 +1022,6 @@
                 document.getElementById('noKidsCapError').style.display = 'none';
             }
 
-            // Couchette 6: Uitsluitend voor vrouwen (+ € 50)
             if (couchette === '6') {
                 ladiesOnlyBox.style.display = 'block';
             } else {
@@ -1084,7 +1030,6 @@
                 document.getElementById('ladiesError').style.display = 'none';
             }
 
-            // Bereken kosten
             const basePrice = pax * 1000;
             const isNonKids = (couchette === '1' || couchette === '11');
             const nonKidsFee = isNonKids ? (pax * 300) : 0;
@@ -1092,13 +1037,9 @@
             const vipFee = vipRestaurantCheckbox.checked ? 150 : 0;
             const total = basePrice + nonKidsFee + ladiesFee + vipFee;
 
-            // Update samenvatting
             let couchetteLabel = 'Couchette ' + couchette;
-            if (isNonKids) {
-                couchetteLabel += ' (Non-Kids)';
-            } else if (couchette === '6') {
-                couchetteLabel += ' (Vrouwenrijtuig)';
-            }
+            if (isNonKids) couchetteLabel += ' (Non-Kids)';
+            else if (couchette === '6') couchetteLabel += ' (Vrouwenrijtuig)';
 
             document.getElementById('summaryCouchette').textContent = couchetteLabel;
             document.getElementById('summaryPax').textContent = pax;
@@ -1120,25 +1061,13 @@
             highlightWagonInScroller(couchette);
         }
 
-        /* Klik-interactie op de 17 rijtuigen in de trein-scroller */
         document.querySelectorAll('#trainScroller .wagon').forEach(function(wagon) {
             wagon.addEventListener('click', function() {
                 const couchetteNr = this.getAttribute('data-couchette');
                 if (couchetteNr) {
-                    if ((couchetteNr === '1' || couchetteNr === '11') && nonKidsCapacity[couchetteNr] <= 0) {
-                        detailTitle.textContent = 'Couchette ' + couchetteNr + ' — VOL = VOL (Uitverkocht)';
-                        detailDesc.textContent = 'Dit Non-Kids rijtuig heeft de maximale capaciteit bereikt. Kies alstublieft een ander rijtuig.';
-                        return;
-                    }
+                    if ((couchetteNr === '1' || couchetteNr === '11') && nonKidsCapacity[couchetteNr] <= 0) return;
                     couchetteSelect.value = couchetteNr;
                     updateFormAndPrice();
-                } else {
-                    document.querySelectorAll('#trainScroller .wagon').forEach(function(w) {
-                        w.classList.remove('active-wagon');
-                    });
-                    this.classList.add('active-wagon');
-                    detailTitle.textContent = this.getAttribute('data-title');
-                    detailDesc.textContent = this.getAttribute('data-desc');
                 }
             });
         });
@@ -1147,7 +1076,6 @@
         couchetteSelect.addEventListener('change', updateFormAndPrice);
         vipRestaurantCheckbox.addEventListener('change', updateFormAndPrice);
 
-        /* 5. Interactieve reCAPTCHA ("Ik ben geen robot"-vinkje) */
         let captchaVerified = false;
         const recaptchaTrigger = document.getElementById('recaptchaTrigger');
         const recaptchaCheckbox = document.getElementById('recaptchaCheckbox');
@@ -1166,132 +1094,71 @@
             }, 600);
         });
 
-        /* 6. Formulier Validatie bij Verzenden */
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             let valid = true;
 
-            // Naam check
             const fullName = document.getElementById('fullName').value.trim();
-            const nameError = document.getElementById('nameError');
-            if (!fullName) {
-                nameError.style.display = 'block';
-                valid = false;
-            } else {
-                nameError.style.display = 'none';
-            }
+            if (!fullName) { document.getElementById('nameError').style.display = 'block'; valid = false; }
+            else { document.getElementById('nameError').style.display = 'none'; }
 
-            // E-mail check: MOET altijd een '@'-teken bevatten
             const emailVal = document.getElementById('emailInput').value.trim();
-            const emailError = document.getElementById('emailError');
             if (!emailVal.includes('@') || emailVal.startsWith('@') || emailVal.endsWith('@')) {
-                emailError.style.display = 'block';
-                valid = false;
-            } else {
-                emailError.style.display = 'none';
-            }
+                document.getElementById('emailError').style.display = 'block'; valid = false;
+            } else { document.getElementById('emailError').style.display = 'none'; }
 
-            // Telefoonnummer check: uitsluitend numerieke tekens
             const phoneVal = phoneInput.value.trim();
-            const phoneError = document.getElementById('phoneError');
-            if (!/^[0-9]{8,15}$/.test(phoneVal)) {
-                phoneError.style.display = 'block';
-                valid = false;
-            } else {
-                phoneError.style.display = 'none';
-            }
+            if (!/^[0-9]{8,15}$/.test(phoneVal)) { document.getElementById('phoneError').style.display = 'block'; valid = false; }
+            else { document.getElementById('phoneError').style.display = 'none'; }
 
             const couchette = couchetteSelect.value;
             const pax = parseInt(passengersInput.value, 10) || 1;
 
-            // Non-Kids Couchette 1 & 11 check: geen kinderen toegestaan + maximale capaciteit (vol = vol)
-            const noKidsError = document.getElementById('noKidsError');
-            const noKidsCapError = document.getElementById('noKidsCapError');
             if (couchette === '1' || couchette === '11') {
-                if (!noKidsConfirmCheckbox.checked) {
-                    noKidsError.style.display = 'block';
-                    valid = false;
-                } else {
-                    noKidsError.style.display = 'none';
-                }
-
-                if (pax > nonKidsCapacity[couchette]) {
-                    noKidsCapError.style.display = 'block';
-                    valid = false;
-                } else {
-                    noKidsCapError.style.display = 'none';
-                }
-            } else {
-                noKidsError.style.display = 'none';
-                noKidsCapError.style.display = 'none';
+                if (!noKidsConfirmCheckbox.checked) { document.getElementById('noKidsError').style.display = 'block'; valid = false; }
+                else { document.getElementById('noKidsError').style.display = 'none'; }
+                if (pax > nonKidsCapacity[couchette]) { document.getElementById('noKidsCapError').style.display = 'block'; valid = false; }
+                else { document.getElementById('noKidsCapError').style.display = 'none'; }
             }
 
-            // Couchette 6 vrouwen-check
-            const ladiesError = document.getElementById('ladiesError');
             if (couchette === '6' && !ladiesConfirmCheckbox.checked) {
-                ladiesError.style.display = 'block';
-                valid = false;
-            } else {
-                ladiesError.style.display = 'none';
-            }
+                document.getElementById('ladiesError').style.display = 'block'; valid = false;
+            } else { document.getElementById('ladiesError').style.display = 'none'; }
 
-            // VIP-restaurant capaciteitscheck (max 30 plaatsen)
-            const vipError = document.getElementById('vipError');
             if (vipRestaurantCheckbox.checked && pax > vipAvailableSeats) {
-                vipError.style.display = 'block';
-                valid = false;
-            } else {
-                vipError.style.display = 'none';
-            }
+                document.getElementById('vipError').style.display = 'block'; valid = false;
+            } else { document.getElementById('vipError').style.display = 'none'; }
 
-            // Voorwaarden check
-            const termsError = document.getElementById('termsError');
             if (!document.getElementById('termsCheckbox').checked) {
-                termsError.style.display = 'block';
-                valid = false;
-            } else {
-                termsError.style.display = 'none';
-            }
+                document.getElementById('termsError').style.display = 'block'; valid = false;
+            } else { document.getElementById('termsError').style.display = 'none'; }
 
-            // reCAPTCHA check
             if (!captchaVerified) {
-                captchaError.style.display = 'block';
-                valid = false;
-            } else {
-                captchaError.style.display = 'none';
-            }
+                document.getElementById('captchaError').style.display = 'block'; valid = false;
+            } else { document.getElementById('captchaError').style.display = 'none'; }
 
             if (!valid) return;
 
-            // Werk Non-Kids capaciteit bij indien Couchette 1 of 11 is geboekt (Vol = Vol)
             if (couchette === '1' || couchette === '11') {
                 nonKidsCapacity[couchette] -= pax;
                 updateCapacityLabels();
                 updateFormAndPrice();
             }
 
-            // Werk VIP-restaurant capaciteit bij indien gekozen
             if (vipRestaurantCheckbox.checked) {
                 vipAvailableSeats -= pax;
                 vipCapacityBadge.textContent = 'Nog ' + vipAvailableSeats + ' / 30 plaatsen vrij';
-                if (vipAvailableSeats <= 0) {
-                    vipRestaurantCheckbox.disabled = true;
-                    vipCapacityBadge.textContent = 'Uitverkocht (0 / 30 vrij)';
-                }
             }
 
-            // Toon bevestiging
             const totalText = document.getElementById('summaryTotal').textContent;
             const confirmationBox = document.getElementById('confirmationBox');
             confirmationBox.style.display = 'block';
             confirmationBox.innerHTML = `
                 <strong>✅ Boeking succesvol geregistreerd, ${fullName}!</strong><br>
-                Er is een bevestiging en betaallink ter waarde van <strong>${totalText}</strong> verzonden naar <strong>${emailVal}</strong>.<br>
-                Telefoonnummer: ${phoneVal} | Gekozen rijtuig: ${document.getElementById('summaryCouchette').textContent}.
+                Betaallink van <strong>${totalText}</strong> verzonden naar <strong>${emailVal}</strong>.
             `;
         });
 
-        // Initialiseer labels en prijs bij laden
         updateCapacityLabels();
         updateFormAndPrice();
     </script>
