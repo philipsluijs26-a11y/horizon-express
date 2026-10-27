@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>The Horizon Express | European Charter</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #102a43;
+            margin: 0;
+            padding: 0;
+        }
+        /* Navigatiebalk met Logo */
+        nav {
+            background-color: #ffffff;
+            padding: 10px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #e0a96d;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .nav-logo img {
+            height: 35px;
+            width: auto;
+            vertical-align: middle;
+            transition: transform 0.2s;
+        }
+        .nav-logo img:hover {
+            transform: scale(1.03);
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: #0d1b2a;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #e0a96d;
+        }
+        /* Hoofdblokken */
+        .wrapper {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(13, 27, 42, 0.08);
+            border-top: 4px solid #0d1b2a;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(13, 27, 42, 0.12);
+        }
+        
+        /* Logo kaart */
+        .hero-card {
+            background-color: #ffffff;
+            padding: 25px 30px 30px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(13, 27, 42, 0.08);
+            border-top: 4px solid #0d1b2a;
+        }
+        .main-logo-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .main-logo-container img {
+            max-width: 100%;
+            height: auto;
+            max-height: 140px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #0d1b2a;
+            border-bottom: 2px solid #e0a96d;
+            padding-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #486581;
+            font-size: 1.2em;
+            margin: 15px 0 25px 0;
+            font-weight: 600;
+        }
+        /* Hoofdfoto bovenaan */
+        .hero-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #0d1b2a;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .hero-image:hover {
+            transform: scale(1.01);
+        }
+        /* Statistieken blokjes */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .stat-box {
+            background-color: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+        }
+        .stat-box:hover {
+            transform: translateY(-5px);
+            background-color: #fff;
+            border-color: #e0a96d;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #0d1b2a;
+        }
+
+        /* FOTOGALERIJ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            background-color: #f8fafc;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: #e0a96d;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-bottom: 2px solid #e0a96d;
+        }
+        .gallery-caption {
+            padding: 14px;
+            font-size: 0.95em;
+            line-height: 1.4;
+            color: #334155;
+            text-align: center;
+        }
+
+        /* INTERACTIEVE TREIN STRIP */
+        .train-track-container {
+            overflow-x: auto;
+            padding: 25px 10px 15px 10px;
+            background-color: #07101a;
+            border-radius: 10px;
+            border-bottom: 4px solid #e0a96d;
+        }
+        .train-consist {
+            display: flex;
+            gap: 4px;
+            min-width: max-content;
+            align-items: flex-end;
+        }
+        .wagon {
+            height: 48px;
+            border-radius: 5px 5px 2px 2px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.7em;
+            font-weight: bold;
+            padding: 0 6px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .wagon:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 15px rgba(224, 169, 109, 0.6);
+            border-color: #e0a96d;
+        }
+        /* Kleuren per eenheid */
+        .loc {
+            background: linear-gradient(135deg, #f8f9fa 0%, #00b4d8 60%, #495057 100%);
+            color: #0d1b2a;
+            width: 70px;
+            border-radius: 12px 5px 2px 2px;
+        }
+        .loc-back {
+            background: linear-gradient(225deg, #f8f9fa 0%, #00b4d8 60%, #495057 100%);
+            color: #0d1b2a;
+            width: 70px;
+            border-radius: 5px 12px 2px 2px;
+        }
+        .bagage {
+            background-color: #1d3557;
+            color: #fff;
+            border-top: 4px solid #a8dadc;
+            width: 80px;
+        }
+        .couchette {
+            background-color: #003082;
+            color: #fff;
+            border-bottom: 5px solid #ffc917;
+            width: 75px;
+        }
+        .resto {
+            background-color: #780000;
+            color: #ffffff;
+            border-bottom: 5px solid #f8edeb;
+            width: 85px;
+        }
+        .wagon-info-box {
+            margin-top: 15px;
+            background-color: #f8fafc;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 5px solid #0d1b2a;
+            border: 1px solid #cbd5e1;
+            min-height: 60px;
+            color: #1e293b;
+        }
+
+        /* Comfort & Sanitair Grid */
+        .comfort-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .comfort-box {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            transition: transform 0.2s;
+        }
+        .comfort-box:hover {
+            transform: translateY(-3px);
+            border-color: #0d1b2a;
+        }
+        .comfort-box h3 {
+            color: #0d1b2a;
+            margin-top: 0;
+            border-bottom: 2px solid #e0a96d;
+            padding-bottom: 8px;
+        }
+
+        /* TICKET & BOOKING FORM */
+        .ticket-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .ticket-form input, .ticket-form select {
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            font-size: 1em;
+            background-color: #f8fafc;
+        }
+        .full-width {
+            grid-column: span 2;
+        }
+        .form-label {
+            font-weight: bold;
+            color: #0d1b2a;
+            font-size: 0.9em;
+            margin-top: 5px;
+            grid-column: span 2;
+        }
+        .checkbox-group {
+            grid-column: span 2;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background-color: #f8fafc;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+        }
+        .checkbox-group label {
+            font-size: 0.9em;
+            color: #334155;
+            cursor: pointer;
+        }
+        .ticket-btn {
+            grid-column: span 2;
+            background-color: #0d1b2a;
+            color: #e0a96d;
+            border: none;
+            padding: 14px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .ticket-btn:hover {
+            background-color: #1b263b;
+            transform: translateY(-2px);
+        }
+        .ticket-output {
+            display: none;
+            margin-top: 25px;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px dashed #e0a96d;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #415a77;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            font-size: 0.95em;
+        }
+        .ticket-label {
+            color: #a9bcd0;
+            font-size: 0.8em;
+            text-transform: uppercase;
+        }
+        .ticket-value {
+            font-weight: bold;
+            color: #e0a96d;
+            font-size: 1.1em;
+        }
+        .email-notice {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #a9bcd0;
+            text-align: center;
+            border-top: 1px solid #415a77;
+            padding-top: 12px;
+            line-height: 1.5;
+        }
+
+        /* Route knoppen & Tabellen */
+        .route-flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .city-badge {
+            background-color: #e2e8f0;
+            color: #1e293b;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            border: 1px solid #cbd5e1;
+            transition: background-color 0.2s;
+        }
+        .city-badge:hover {
+            background-color: #0d1b2a;
+            color: #e0a96d;
+        }
+        .arrow {
+            color: #e0a96d;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #0d1b2a;
+            color: #e0a96d;
+        }
+        tr:hover {
+            background-color: #f8fafc;
+        }
+        .badge-night {
+            background-color: #003082;
+            color: #ffc917;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .badge-day {
+            background-color: #e0a96d;
+            color: #0d1b2a;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">
+            <a href="#overzicht"><img src="logo.png" alt="The Horizon Express Logo"></a>
+        </div>
+        <div class="nav-links">
+            <a href="#overzicht">Overzicht</a>
+            <a href="#fotos">Fotogalerij</a>
+            <a href="#treinstrip">Interactieve Trein</a>
+            <a href="#ticket">Boek je Ticket</a>
+            <a href="#prijzen">Begroting</a>
+            <a href="#route">Route</a>
+            <a href="#voorwaarden">Voorwaarden</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <!-- Koptekst met logo -->
+        <div class="hero-card" id="overzicht">
+            <div class="main-logo-container">
+                <img src="logo.png" alt="The Horizon Express Logo">
+            </div>
+            
+            <p class="subtitle">Vertrek: 31 juli 2027 • 14 Dagen • 11 Steden • 9 Landen</p>
+
+            <img src="vectron.jpg" alt="Siemens Vectron The Horizon Express" class="hero-image">
+
+            <p>Welkom aan boord van The Horizon Express. Een unieke rijdende expeditie met vertrek op <strong>31 juli 2027</strong>. Reis door 9 Europese landen met eigen UIC-X Bcvmh couchetterijtuigen en twee bordeauxrode restauratierijtuigen[cite: 5].</p>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">435 m</div>
+                    <div>Totale Lengte</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">17</div>
+                    <div>Eenheden</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">160 km/h</div>
+                    <div>Topsnelheid</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">€ 1.000</div>
+                    <div>All-in p.p.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fotogalerij met 4 foto's -->
+        <div class="card" id="fotos">
+            <h2>📸 Het Materieel & Interieur in Beeld</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="vectron.jpg" alt="Siemens Vectron MS">
+                    <div class="gallery-caption">
+                        <strong style="color: #0d1b2a;">2x Siemens Vectron MS</strong><br>
+                        Krachtige meersysteemlocomotieven in sandwich-formatie.
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="couchette.jpg" alt="UIC-X Bcvmh Couchette">
+                    <div class="gallery-caption">
+                        <strong style="color: #0d1b2a;">12x UIC-X Bcvmh Couchette</strong><br>
+                        Nachtblauwe ligrijtuigen met comfortabele zit- en slaapbanken.
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resto.png" alt="Bordeauxrood Restauratierijtuig">
+                    <div class="gallery-caption">
+                        <strong style="color: #0d1b2a;">2x Bordeauxrood Restauratierijtuig</strong><br>
+                        Klassieke restaurantwagens voor maaltijden en gezelligheid[cite: 5].
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="interieur.jpg" alt="Restauratie Interieur">
+                    <div class="gallery-caption">
+                        <strong style="color: #0d1b2a;">Sfeervol Interieur</strong><br>
+                        Rode loungebanken en gedekte tafels met schemerlampjes[cite: 4].
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactieve Visuele Trein-strip (17 eenheden!) -->
+        <div class="card" id="treinstrip">
+            <h2>🚂 Interactieve Treinsamenstelling (17 Eenheden)</h2>
+            <p>Klik op een van de eenheden hieronder voor de specificaties:</p>
+
+            <div class="train-track-container">
+                <div class="train-consist">
+                    <div class="wagon loc" onclick="toonInfo('Locomotief 1: Siemens Vectron MS (Voor)', 'Trekkende meersysteemlocomotief • 6.400 kW • ETCS L2 / ATB / PZB / SCMT.')">LOC 1<br>Vectron</div>
+                    <div class="wagon bagage" onclick="toonInfo('Eenheid 2: Dms Bagagerijtuig', 'Opslag voor koffers, reisprovisie en technische uitrusting.')">Dms<br>Bagage</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 3: UIC-X Bcvmh Couchette (Blok 1)', 'Ligrijtuig 1 • Overdag 6 zitplaatsen, \'s nachts 6 bedden.')">Couchette<br>Nr. 1</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 4: UIC-X Bcvmh Couchette (Blok 1)', 'Ligrijtuig 2 • Voorzien van toilet en wasruimte.')">Couchette<br>Nr. 2</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 5: UIC-X Bcvmh Couchette (Blok 1)', 'Ligrijtuig 3 • Comfortabele coupés voor reizigers.')">Couchette<br>Nr. 3</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 6: UIC-X Bcvmh Couchette (Blok 1)', 'Ligrijtuig 4 • Centrale energievoorziening.')">Couchette<br>Nr. 4</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 7: UIC-X Bcvmh Couchette (Blok 1)', 'Ligrijtuig 5 • Vlakbij het eerste restauratierijtuig.')">Couchette<br>Nr. 5</div>
+                    <div class="wagon resto" onclick="toonInfo('Restauratierijtuig 1 (Bordeauxrood)', 'Eerste restaurantwagen • Volledige keuken, bar en tafels met schemerlampjes.')">🍽️ Resto<br>Wagon 1</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 9: UIC-X Bcvmh Couchette (Midden)', 'Ligrijtuig 6 • Strategisch geplaatst tussen beide restaurants.')">Couchette<br>Nr. 6</div>
+                    <div class="wagon resto" onclick="toonInfo('Restauratierijtuig 2 (Bordeauxrood)', 'Tweede restaurantwagen • Extra zitplaatsen en loungegedeelte voor de hele groep.')">🍽️ Resto<br>Wagon 2</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 11: UIC-X Bcvmh Couchette (Blok 2)', 'Ligrijtuig 7 • Eerste rijtuig achter het tweede restaurant.')">Couchette<br>Nr. 7</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 12: UIC-X Bcvmh Couchette (Blok 2)', 'Ligrijtuig 8 • RIC 160 km/h toelating voor heel Europa.')">Couchette<br>Nr. 8</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 13: UIC-X Bcvmh Couchette (Blok 2)', 'Ligrijtuig 9 • Grote capaciteit voor alle deelnemers.')">Couchette<br>Nr. 9</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 14: UIC-X Bcvmh Couchette (Blok 2)', 'Ligrijtuig 10 • Rustige ligging in de trein.')">Couchette<br>Nr. 10</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 15: UIC-X Bcvmh Couchette (Blok 2)', 'Ligrijtuig 11 • Extra opbergruimte.')">Couchette<br>Nr. 11</div>
+                    <div class="wagon couchette" onclick="toonInfo('Eenheid 16: UIC-X Bcvmh Couchette (Personeel)', 'Ligrijtuig 12 • Inclusief slaapverblijf voor koks, machinisten en begeleiders.')">Couchette<br>Personeel</div>
+                    <div class="wagon loc-back" onclick="toonInfo('Locomotief 17: Siemens Vectron MS (Achter)', 'Duwende locomotief in sandwich-formatie • Direct kopmaken in kopstations!')">LOC 2<br>Vectron</div>
+                </div>
+            </div>
+
+            <div class="wagon-info-box" id="info-scherm">
+                <strong style="color: #0d1b2a;">👆 Klik hierboven op een rijtuig voor details</strong><br>
+                <span>Bekijk de exacte functie van elke eenheid in onze 17-delige trein.</span>
+            </div>
+        </div>
+
+        <!-- BOEKINGSSYSTEEM (T/M 12 PERSONEN & € 1000 P.P.) -->
+        <div class="card" id="ticket">
+            <h2>🎟️ Boekingsportaal & Tickets (Vertrek: 31 Juli 2027)</h2>
+            <p>Boek hier je tickets voor The Horizon Express. Je kunt voor maximaal 12 personen tegelijk boeken (€ 1.000,00 per persoon all-in).</p>
+
+            <div class="ticket-form">
+                <div class="form-label">1. Contactgegevens Hoofdboeker</div>
+                <input type="text" id="hoofdLidNaam" placeholder="Voor- en Achternaam" required>
+                <input type="email" id="hoofdLidEmail" placeholder="E-mailadres (hier ontvang je de betaallink en tickets)" required>
+                <input type="tel" id="hoofdLidTel" placeholder="Telefoonnummer" class="full-width" required>
+
+                <div class="form-label">2. Reisdetails & Aantal Personen (max. 12)</div>
+                <select id="aantalPersonen" class="full-width">
+                    <option value="1">1 Reiziger (€ 1.000,00)</option>
+                    <option value="2">2 Reizigers (€ 2.000,00)</option>
+                    <option value="3">3 Reizigers (€ 3.000,00)</option>
+                    <option value="4">4 Reizigers (€ 4.000,00)</option>
+                    <option value="5">5 Reizigers (€ 5.000,00)</option>
+                    <option value="6">6 Reizigers (€ 6.000,00)</option>
+                    <option value="7">7 Reizigers (€ 7.000,00)</option>
+                    <option value="8">8 Reizigers (€ 8.000,00)</option>
+                    <option value="9">9 Reizigers (€ 9.000,00)</option>
+                    <option value="10">10 Reizigers (€ 10.000,00)</option>
+                    <option value="11">11 Reizigers (€ 11.000,00)</option>
+                    <option value="12">12 Reizigers (€ 12.000,00)</option>
+                </select>
+
+                <select id="reisKlasse" class="full-width">
+                    <option value="Couchette Standaard">Couchette Standaard (€ 1.000,00 p.p. all-in)</option>
+                    <option value="Restauratie VIP Lounge">Restauratie VIP Lounge (€ 1.050,00 p.p. inclusief gereserveerde tafel)</option>
+                </select>
+
+                <div class="form-label">3. Kies je Flexibiliteit (Annuleringsvoorwaarden)</div>
+                <select id="flexibiliteit" class="full-width">
+                    <option value="Easy Night">Easy Night (Inbegrepen) — Annuleren niet mogelijk</option>
+                    <option value="Good Night">Good Night (+ € 30,00 p.p.) — 100% tot 1 maand & 50% tot 15 dagen voor vertrek</option>
+                    <option value="Flex Night">Flex Night (+ € 40,00 p.p.) — 100% annuleren tot 48 uur voor vertrek</option>
+                </select>
+
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="checkVoorwaarden" required> Ik ga akkoord met de <a href="#voorwaarden">Algemene Voorwaarden</a> van The Horizon Express</label>
+                    <label><input type="checkbox" id="checkNieuwsbrief"> Ja, stuur mij de Horizon Express reiskrant en updates per e-mail</label>
+                </div>
+
+                <button class="ticket-btn" onclick="genereerBoeking()">Plaats Boeking & Ontvang Betaallink per E-mail 💳</button>
+            </div>
+
+            <!-- Het gegenereerde ticket & betaalnotificatie -->
+            <div class="ticket-output" id="ticketOutput">
+                <div class="ticket-header">
+                    <div>
+                        <strong style="font-size: 1.3em; color: #e0a96d;">THE HORIZON EXPRESS</strong><br>
+                        <span style="font-size: 0.85em; color: #a9bcd0;">EXPEDITION PASS 2027 (VERTREK: 31 JULI)</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="background-color: #e0a96d; color: #0d1b2a; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.9em;" id="outFlexBadge">FLEX</span>
+                    </div>
+                </div>
+                <div class="ticket-grid">
+                    <div>
+                        <div class="ticket-label">Hoofdboeker</div>
+                        <div class="ticket-value" id="outNaam">-</div>
+                    </div>
+                    <div>
+                        <div class="ticket-label">Aantal Tickets</div>
+                        <div class="ticket-value" id="outAantal">-</div>
+                    </div>
+                    <div>
+                        <div class="ticket-label">Totaalbedrag</div>
+                        <div class="ticket-value" id="outPrijs">-</div>
+                    </div>
+                </div>
+                <div class="email-notice" id="outEmailNotice">
+                    ✉️ <strong>Reservering ontvangen!</strong> Er is een e-mail verzonden naar <span id="outEmailDisplay"></span> met daarin je tijdelijke reserveringsbevestiging, de digitale tickets én een beveiligde <strong>iDEAL/Creditcard betaallink</strong> om de betaling te voltooien.
+                </div>
+            </div>
+        </div>
+
+        <!-- Financiële Begroting & Prijzen -->
+        <div class="card" id="prijzen">
+            <h2>💶 Financiële Begroting & Prijzen per Persoon</h2>
+            <p>Voor dit project is een realistische kostencalculatie gemaakt op basis van internationale spoorwegtarieven voor een 14-daagse charter door 9 landen.</p>
+            <table>
+                <tr>
+                    <th>Kostenpost</th>
+                    <th>Wat krijg je ervoor?</th>
+                    <th>Kosten per persoon</th>
+                </tr>
+                <tr>
+                    <td><strong>All-in Reissom</strong></td>
+                    <td>14-daagse chartertrein, 11 steden, hotels/hostel stops & catering</td>
+                    <td><strong>€ 1.000,00</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- De Route & Dienstregeling -->
+        <div class="card" id="route">
+            <h2>🗺️ De Europese Route & Dienstregeling</h2>
+            <p><strong>Vertrekdatum:</strong> 31 juli 2027 vanuit Amsterdam Centraal.</p>
+            <div class="route-flow" style="margin-bottom: 25px;">
+                <span class="city-badge">1. Antwerpen</span> <span class="arrow">➔</span>
+                <span class="city-badge">2. Stuttgart</span> <span class="arrow">➔</span>
+                <span class="city-badge">3. Bern</span> <span class="arrow">➔</span>
+                <span class="city-badge">4. Milaan</span> <span class="arrow">➔</span>
+                <span class="city-badge">5. Wenen</span> <span class="arrow">➔</span>
+                <span class="city-badge">6. Boedapest</span> <span class="arrow">➔</span>
+                <span class="city-badge">7. Bratislava</span> <span class="arrow">➔</span>
+                <span class="city-badge">8. Praag</span> <span class="arrow">➔</span>
+                <span class="city-badge">9. Leipzig</span> <span class="arrow">➔</span>
+                <span class="city-badge">10. Düsseldorf</span> <span class="arrow">➔</span>
+                <span class="city-badge">11. Amsterdam</span>
+            </div>
+        </div>
+
+        <!-- ALGEMENE VOORWAARDEN -->
+        <div class="card" id="voorwaarden">
+            <h2>📜 Algemene Voorwaarden (The Horizon Express)</h2>
+            <p>Door het boeken van een reis met The Horizon Express ga je akkoord met onderstaande voorwaarden:</p>
+            <ol>
+                <li><strong>Totstandkoming overeenkomst:</strong> De boeking is definitief zodra het inschrijfformulier is verzonden en de betaling via de toegezonden betaallink in de e-mail binnen is.</li>
+                <li><strong>Betaling:</strong> De betaling dient binnen 48 uur na ontvangst van de betaallink te worden voldaan. Bij uitblijven van betaling vervalt de reservering.</li>
+                <li><strong>Annulering & Flexibiliteit:</strong> Afhankelijk van de gekozen flexibiliteitsformule (*Easy Night*, *Good Night* of *Flex Night*) gelden de bijbehorende annuleringsrechten.</li>
+                <li><strong>Punctualiteit & Gedrag:</strong> De trein vertrekt volgens strakke internationale dienstregelingen. Reizigers dienen tijdig aanwezig te zijn op de perrons. De treinleiding behoudt zich het recht voor om ordeverstoorders te weigeren.</li>
+            </ol>
+        </div>
+
+        <!-- CONTACT PAGINA -->
+        <div class="card" id="contact">
+            <h2>📞 Contact & Klantenservice</h2>
+            <p>Heb je vragen over je boeking, de route of de faciliteiten aan boord? Neem gerust contact met ons op:</p>
+            <ul>
+                <li><strong>E-mail:</strong> philipsluijs@gmail.com</li>
+                <li><strong>Telefoon:</strong> +31 645574529 (Bereikbaar op werkdagen van 09:00 tot 17:00 uur)</li>
+                <li><strong>Kantooradres:</strong> Noordersingel 4, 3755 EZ Eemnes</li>
+            </ul>
+        </div>
+
+        <!-- Technische Specificaties -->
+        <div class="card" id="techniek">
+            <h2>⚡ Technische Specificaties & Leasing</h2>
+            <ul>
+                <li><strong>Locomotief Lease:</strong> 2x Siemens Vectron MS A39 via <em>ELL</em> of <em>Railpool</em>.</li>
+                <li><strong>Rijtuigen Lease:</strong> 12x UIC-X Bcvmh couchetterijtuigen, 2x bordeauxrode restauratierijtuigen en 1x Dms bagagerijtuig.</li>
+                <li><strong>Stroomsystemen:</strong> 1,5 / 3 / 15 / 25 kV AC/DC.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function toonInfo(titel, tekst) {
+            const scherm = document.getElementById('info-scherm');
+            scherm.innerHTML = '<strong style="color: #0d1b2a; font-size: 1.1em;">🚂 ' + titel + '</strong><br><span style="color: #334155;">' + tekst + '</span>';
+        }
+
+        function genereerBoeking() {
+            const naam = document.getElementById('hoofdLidNaam').value;
+            const email = document.getElementById('hoofdLidEmail').value;
+            const tel = document.getElementById('hoofdLidTel').value;
+            const aantal = parseInt(document.getElementById('aantalPersonen').value);
+            const klasse = document.getElementById('reisKlasse').value;
+            const flex = document.getElementById('flexibiliteit').value;
+            const voorwaarden = document.getElementById('checkVoorwaarden').checked;
+            const output = document.getElementById('ticketOutput');
+
+            if (naam.trim() === "" || email.trim() === "" || tel.trim() === "") {
+                alert("Vul alsjeblieft alle contactgegevens in!");
+                return;
+            }
+
+            if (!voorwaarden) {
+                alert("Je moet akkoord gaan met de Algemene Voorwaarden om te kunnen boeken.");
+                return;
+            }
+
+            // Basisprijs € 1000 p.p. (plus kleine toeslag voor VIP indien gekozen)
+            let basisPrijs = 1000.00;
+            if (klasse.includes("VIP")) {
+                basisPrijs += 50.00;
+            }
+
+            // Flexibiliteit kosten per persoon
+            let flexKosten = 0;
+            if (flex === "Good Night") {
+                flexKosten = 30.00;
+            } else if (flex === "Flex Night") {
+                flexKosten = 40.00;
+            }
+
+            const totaalBedrag = (basisPrijs + flexKosten) * aantal;
+
+            document.getElementById('outNaam').innerText = naam;
+            document.getElementById('outAantal').innerText = `${aantal} Ticket(s) (${klasse})`;
+            document.getElementById('outFlexBadge').innerText = flex.toUpperCase();
+            document.getElementById('outPrijs').innerText = `€ ${totaalBedrag.toFixed(2).replace('.', ',')}`;
+            document.getElementById('outEmailDisplay').innerText = email;
+
+            output.style.display = "block";
+            output.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
